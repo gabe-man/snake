@@ -82,7 +82,7 @@ public class Serpiente {
     	
     	resultado = (seEstaTocandoEllaMisma() || seHaSalido(iAlto, iAncho));
     	
-        return false;//poniendo aqui false la serpiente jam·s morir·
+        return resultado;
     }
 
     //la cabeza, est√° tocando alguna parte de su cuerpo??

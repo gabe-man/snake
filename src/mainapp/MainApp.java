@@ -10,10 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JComboBox;
 
-import GUI.ControlTeclado;
-import GUI.MyButtonListener;
-import GUI.MySnakeFrame;
 import models.TableroJuego;
 
 public class MainApp {
@@ -33,7 +31,8 @@ public class MainApp {
 		ControlTeclado miControlador;
 
 		// 1. Crear el frame.
-		frame = new MySnakeFrame();
+		//menu=new MenuDificultad();
+		frame=new MySnakeFrame();
 
 		// asignamos el tamaño a nuestra ventana, y hacemos que se cierre cuando nos
 		// pulsan
@@ -110,12 +109,39 @@ public class MainApp {
 		contador = 0; // nuestro control de los pasos del tiempo. Cada vez que contador cuenta un
 						// paso, pasan 10ms
 
+		int seleccion = JOptionPane.showOptionDialog(
+				   frame,
+				   "Seleccione dificultad", 
+				   "Selector de dificultad",
+				   JOptionPane.YES_NO_CANCEL_OPTION,
+				   JOptionPane.QUESTION_MESSAGE,
+				   null, 
+				   new Object[] { "F�cil", "Intermedio", "Dificil","Imposible" },
+				   "Intermedio");
+		int velocidad;
+		switch (seleccion) {
+		case 0:
+			velocidad=60;
+			break;
+		case 1:
+			velocidad=20;
+			break;
+		case 2:
+			velocidad=5;
+			break;
+		case 3:
+			velocidad=1;
+			break;
+		default:
+			velocidad=20;
+			break;
+		}
 		while (true) { // por siempre jamás (hasta que nos cierren la ventana) estamos controlando el
 						// juego.
 
 			// actualizamos el estado del juego
-			if (contador % 40 == 0) { // cada 400ms nos movemos o crecemos...
-				if (contador == 120) { // Cada 1200ms crecemos y reseteamos el contador
+			if (contador % velocidad == 0) { // cada 400ms nos movemos o crecemos...
+				if (contador == 60) { // Cada 1200ms crecemos y reseteamos el contador
 					contador = 0;
 					frame.tocaCrecer();
 					// hemos crecido... actualizamos puntos.

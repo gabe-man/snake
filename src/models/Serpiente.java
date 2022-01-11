@@ -138,5 +138,11 @@ public class Serpiente {
     public int getPuntos() {
     	return listaCuadrados.size();
     }
+
+	public ArrayList<Cuadrado> getListaCuadrados() {
+		return listaCuadrados;
+	}
+    
+    
     
 }

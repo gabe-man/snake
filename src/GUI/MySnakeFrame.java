@@ -3,6 +3,7 @@ package GUI;
 import javax.swing.JFrame;
 
 import models.Serpiente;
+import models.Manzana;
 
 /**
  * Clase MySnakeFrame
@@ -32,6 +33,7 @@ public class MySnakeFrame extends JFrame {
 	
 	//Nuestra serpiente
 	private Serpiente snake;
+	private Manzana manzana;
 	
 	//semáforos para indicar que estamos jugando o no
 	private boolean jugando;
@@ -47,6 +49,7 @@ public class MySnakeFrame extends JFrame {
 	//Constructor
 	public MySnakeFrame() {
 		snake = new Serpiente();
+		manzana = new Manzana();
 		jugando = false;
 		mostrarFinal = false;
 		mostrado = false;
@@ -57,6 +60,10 @@ public class MySnakeFrame extends JFrame {
 	//si alguien necesita nuestra serpiente, se la proporcionamos.
 	public Serpiente getSerpiente() {
 		return snake;
+	}
+	
+	public Manzana getManzana() {
+		return manzana;
 	}
 	
 	
@@ -89,7 +96,7 @@ public class MySnakeFrame extends JFrame {
 	
 	//han pulsado el botón de start, hay que ponerlo todo en orden.
 	public void empezarDeNuevo() {
-		snake = new Serpiente();  //nueva y flamante serpiente
+		snake = new Serpiente();//nueva y flamante serpiente
 		jugando = true;           //estamos jugando a partir de ¡YA!
 		mostrarFinal = false;     //ni estamos al final ni mucho menos
 		mostrado = false;         //hemos mostrado el msg de final

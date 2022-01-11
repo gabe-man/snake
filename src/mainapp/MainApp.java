@@ -12,7 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
 
+import models.Cuadrado;
 import models.TableroJuego;
+import models.Manzana;
 
 public class MainApp {
 
@@ -165,16 +167,52 @@ public class MainApp {
 			velocidad=20;
 			break;
 		}
+		boolean valido=false;
+		int xManzanaInicial=0;
+		int yManzanaInicial=0;
+		while(!valido)
+		{
+			xManzanaInicial=(int)(Math.random()*tablero.getWidth());
+			yManzanaInicial=(int)(Math.random()*tablero.getHeight());
+			valido=true;
+			for (int i = 0; i < frame.getSerpiente().getListaCuadrados().size(); i++) {
+				if(frame.getSerpiente().getListaCuadrados().get(i).getX()==xManzanaInicial && frame.getSerpiente().getListaCuadrados().get(i).getY()==yManzanaInicial || xManzanaInicial%20!=0 || yManzanaInicial%20!=0)
+				{
+					valido=false;
+				}
+			}
+		}
+		frame.getManzana().setPosicionX(xManzanaInicial);
+		frame.getManzana().setPosicionY(yManzanaInicial);
+		frame.getManzana().setColor(frame.getSerpiente().getListaCuadrados().get(0).getColor());
+		frame.getManzana().setLado(frame.getSerpiente().getListaCuadrados().get(0).getLado());
 		while (true) { // por siempre jamás (hasta que nos cierren la ventana) estamos controlando el
 						// juego.
 
 			// actualizamos el estado del juego
 			if (contador % velocidad == 0) { // cada 400ms nos movemos o crecemos...
-				if (contador == 60) { // Cada 1200ms crecemos y reseteamos el contador
+				if (frame.getSerpiente().getListaCuadrados().get(0).getX()==frame.getManzana().getPosicionX() && frame.getSerpiente().getListaCuadrados().get(0).getY()==frame.getManzana().getPosicionY()) { // Cada 1200ms crecemos y reseteamos el contador
 					contador = 0;
 					frame.tocaCrecer();
 					// hemos crecido... actualizamos puntos.
 					puntosNum.setText(Integer.toString(frame.getSerpiente().getPuntos()));
+					boolean ok=false;
+					int posicionx=(int)(Math.random()*tablero.getWidth());
+					int posiciony=(int)(Math.random()*tablero.getHeight());
+					while(!ok)
+					{
+						posicionx=(int)(Math.random()*tablero.getWidth());
+						posiciony=(int)(Math.random()*tablero.getHeight());
+						ok=true;
+						for (int i = 0; i < frame.getSerpiente().getListaCuadrados().size(); i++) {
+							if(frame.getSerpiente().getListaCuadrados().get(i).getX()==posicionx && frame.getSerpiente().getListaCuadrados().get(i).getY()==posiciony || posicionx%20!=0 || posiciony%20!=0)
+							{
+								ok=false;
+							}
+						}
+					}
+					frame.getManzana().setPosicionX(posicionx);
+					frame.getManzana().setPosicionY(posiciony);
 				} else { // a los 200 y 400 ms nos movemos...
 					contador++;
 					frame.tocaMoverse();

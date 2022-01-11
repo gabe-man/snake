@@ -34,12 +34,41 @@ public class MainApp {
 		//menu=new MenuDificultad();
 		frame=new MySnakeFrame();
 
-		// asignamos el tamaÃ±o a nuestra ventana, y hacemos que se cierre cuando nos
-		// pulsan
-		// la X de cerrar la ventana
-		frame.setSize(600, 600);
+		int selecciontamaño = JOptionPane.showOptionDialog(
+				   frame,
+				   "Seleccione tamaño", 
+				   "Selector del tamaño",
+				   JOptionPane.YES_NO_CANCEL_OPTION,
+				   JOptionPane.QUESTION_MESSAGE,
+				   null, 
+				   new Object[] { "Pequeño", "Mediano", "Grande"},
+				   "Mediano");
+		
+		int ancho;
+		int alto;
+		switch(selecciontamaño)
+		{
+		case 0:
+			ancho=300;
+			alto=200;
+			break;
+		case 1:
+			ancho=600;
+			alto=400;
+			break;
+		case 2:
+			ancho=900;
+			alto=600;
+			break;
+		default:
+			ancho=600;
+			alto=400;
+			break;
+		}
+		
+		frame.setSize(ancho, alto+200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+			
 		// 3. Ahora creamos los componentes y los ponemos en la frame (ventana).
 
 		// El panel de fondo. Rellena el frame, y sirve de contenedor del tablero y de
@@ -53,7 +82,7 @@ public class MainApp {
 		// Les damos las propiedades a nuestro tablero. Su color, tamaÃ±o y borde
 		tablero.setBorder(BorderFactory.createLineBorder(Color.black));
 		tablero.setBackground(new java.awt.Color(255, 255, 255));
-		tablero.setSize(600, 400);
+		tablero.setSize(ancho, alto);
 
 		// Le damos un enlace al tablero para que sepa quiÃ©n es su frame (ventana) y asÃ­
 		// sepa
@@ -109,7 +138,7 @@ public class MainApp {
 		contador = 0; // nuestro control de los pasos del tiempo. Cada vez que contador cuenta un
 						// paso, pasan 10ms
 
-		int seleccion = JOptionPane.showOptionDialog(
+		int selecciondificultad = JOptionPane.showOptionDialog(
 				   frame,
 				   "Seleccione dificultad", 
 				   "Selector de dificultad",
@@ -119,7 +148,7 @@ public class MainApp {
 				   new Object[] { "Fácil", "Intermedio", "Dificil","Imposible" },
 				   "Intermedio");
 		int velocidad;
-		switch (seleccion) {
+		switch (selecciondificultad) {
 		case 0:
 			velocidad=60;
 			break;

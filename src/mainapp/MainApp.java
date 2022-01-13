@@ -216,8 +216,17 @@ public class MainApp {
 				} else { // a los 200 y 400 ms nos movemos...
 					contador++;
 					frame.tocaMoverse();
+					if(frame.getSerpiente().getListaCuadrados().get(0).getX()>=tablero.getWidth())
+					{
+						frame.getSerpiente().getListaCuadrados().get(0).setX(0);
+					}
+					if(frame.getSerpiente().getListaCuadrados().get(0).getX()<0)
+					{
+						frame.getSerpiente().getListaCuadrados().get(0).setX(tablero.getWidth()-6);
+					}
+					
 				}
-				frame.comprobarEstado(tablero.getHeight(), tablero.getWidth()); // comprobamos si hemos muerto o no.
+				frame.comprobarEstado(tablero.getHeight()); // comprobamos si hemos muerto o no.
 
 			} else { // Cada vez que no hay que moverse o crecer, simplemente contamos...
 				contador++;

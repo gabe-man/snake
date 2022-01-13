@@ -71,6 +71,10 @@ public class Cuadrado {
     public int getColor() {
     	return colorCuadrado;
     }
+    
+    public void setX(int x) {
+    	this.posX=x;
+    }
 
     //Un cuadrado tiene que saber pintarse
     public void pintarse(Graphics2D g) {

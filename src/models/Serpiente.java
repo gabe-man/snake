@@ -34,6 +34,8 @@ public class Serpiente {
         iDireccion = Cuadrado.ABAJO;    
 
     }
+    
+    
 
     //Moverse. Una serpiente sabe moverse
     public void moverse(){
@@ -77,10 +79,10 @@ public class Serpiente {
 
 
     //la serpiente se muere porque se toca a si misma o porque se ha salido del tablero
-    public boolean estaMuerta(int iAlto, int iAncho) {
+    public boolean estaMuerta(int iAlto) {
     	boolean resultado;
     	
-    	resultado = (seEstaTocandoEllaMisma() || seHaSalido(iAlto, iAncho));
+    	resultado = (seEstaTocandoEllaMisma() || seHaSalido(iAlto));
     	
         return resultado;
     }
@@ -103,11 +105,11 @@ public class Serpiente {
     }
 
     //nos hemos salido de los límites del tablero???
-    private boolean seHaSalido(int iAlto, int iAncho) {
+    private boolean seHaSalido(int iAlto) {
         //Hacemos las comprobaciones sobre la cabeza
         Cuadrado cabeza = listaCuadrados.get(0);
 
-        return (cabeza.getX() < 0 || cabeza.getX() > iAncho || cabeza.getY() < 0 || cabeza.getY() > iAlto);
+        return (cabeza.getY() < 0 || cabeza.getY() > iAlto);
     }
 
     //la serpiente también sabe pintarse
